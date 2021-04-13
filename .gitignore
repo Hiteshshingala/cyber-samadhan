@@ -1,0 +1,4 @@
+/node_modules
+/public/images/uploads/*.jpg
+/public/images/uploads/*.pdf
+/views
