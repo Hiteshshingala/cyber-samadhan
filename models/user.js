@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     zip: DataTypes.INTEGER,
-    role: DataTypes.ENUM('ADMIN', 'BUYER', 'SELLER', 'BOTH', 'SUPPORT'),
+    role: DataTypes.ENUM('ADMIN', 'USER'),
     Verifytoken: DataTypes.STRING,
     UserUniquId: DataTypes.STRING,
     isActive: DataTypes.BOOLEAN,

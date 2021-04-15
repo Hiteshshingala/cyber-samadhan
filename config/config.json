@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "123456",
-    "database": "cybersamadhan",
-    "host": "127.0.0.1",
+    "username": "sql6405459",
+    "password": "P7Q9QRFvvW",
+    "database": "sql6405459",
+    "host": "sql6.freesqldatabase.com",
     "dialect": "mysql",
     "operatorsAliases": false
   },

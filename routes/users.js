@@ -2,22 +2,16 @@ var express = require('express');
 var router = express.Router();
 const authController = require('../controller/authController')
 const userController = require('../controller/userController')
-const accountController = require('../controller/accountController')
+// const accountController = require('../controller/accountController')
 const path = require('path');
 const AuthToken = require('./../middleware/auth')
-const roleController = require('../controller/roleController');
+// const roleController = require('../controller/roleController');
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
 // });
 
-//for roles
-
-router.get('/roles', AuthToken, async function (req, res, next) {
-  const data = await roleController.getRoles(req, res)
-  res.send(data);
-});
 
 router.post('/register',  async function (req, res, next) {
   let data = await authController.register(req, res);
@@ -48,30 +42,6 @@ router.get('/profile/:id', AuthToken, async function (req, res, next) {
 router.delete('/profile/:id', AuthToken, async function (req, res, next) {
   const id = req.params.id;
   let data = await userController.deleteUser(id)
-  res.send(data)
-})
-
-router.post('/account', AuthToken, async function (req, res, next) {
-  let data = await accountController.createAccount(req, res)
-  res.send(data)
-})
-router.put('/account', AuthToken, async function (req, res, next) {
-  let data = await accountController.updateAccount(req, res)
-  res.send(data)
-})
-router.get('/profile', AuthToken, async function (req, res, next) {
-  let data = await accountController.updateAccount(req, res)
-  res.send(data)
-})
-router.get('/account/:id', AuthToken, async function (req, res, next) {
-  const id = req.params.id;
-  let data = await accountController.getAccount(req, id);
-  res.send(data)
-})
-
-router.delete('/account/:id', AuthToken, async function(req, res, next) {
-  const id = req.params.id;
-  let data = await accountController.deleteAccount(id);
   res.send(data)
 })
 router.get('/fogotpassword', async function (req, res) {
