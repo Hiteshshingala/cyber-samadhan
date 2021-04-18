@@ -111,7 +111,7 @@ module.exports = {
                         if (users) {
                             if (bcrypt.compareSync(req.body.password, users.password)) {
                                 users.password = null
-                                let token = jwt.sign({ email: req.body.email, id: users.id, role: users.role }, constant.JWT_SECRET, { expiresIn: constant.JWT_EXPIRETIME })
+                                let token = jwt.sign({ email: req.body.email, id: users.id, role: users.role, userUniquId: users.UserUniquId }, constant.JWT_SECRET, { expiresIn: constant.JWT_EXPIRETIME })
                                 let responceData = {
                                     token: token,
                                     Users: {

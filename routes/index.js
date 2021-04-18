@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+const AuthToken = require('./../middleware/auth')
 
 const commonController = require('../controller/commonController');
 const osDetailsController = require('../controller/osdetailsController');
+const generateUrlController = require('../controller/generateUrlController');
 const upload = require('../config/multer');
 
 /* GET home page. */
@@ -32,6 +34,14 @@ router.get('/telegramlink', function(req, res, next) {
   console.log('@@@', path.join(__dirname + '/../public/telegram.html'))
   res.sendFile(path.join(__dirname + '/../public/telegram.html'))
 });
+
+router.post('/createUrl', AuthToken, async function(req, res) {
+  const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId}, res)
+  console.log('@@@userData', data);
+  res.json({
+    data: data
+  })
+})
 
 
 router.post('/saveuserData', async function (req, res) {
