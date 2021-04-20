@@ -5,6 +5,14 @@ module.exports = {
     EMAIL: process.env.EMAIL,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
 
+
+    //for urltype
+    WHATSAPP: 'whatsapp',
+    TELEGRAM: 'telegram',
+    GDRIVE: 'gdrive',
+    BASE_URL: 'http://localhost:8080',
+    IMAGE_BASE_URL: 'http://localhost:8080/public/images/uploads/',
+
     // for error message
     USER_REGISTER_SUCCESSFULLY : 'User Register successfully',
     PLEASE_ENTER_VALID_PASSWORD  : 'Please Enter Valid Password',
@@ -42,6 +50,11 @@ module.exports = {
     ROle_GET_SUCCESS: 'Role Get Success',
     EMAIL_ALLREADY_EXIST: 'Email Already Exist',
     USER_NOT_VALID: 'User Not Valid',
+
+
+
+    //user not found
+    URL_NOT_FOUND: 'URL not found',
 
 
 

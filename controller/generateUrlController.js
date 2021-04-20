@@ -15,42 +15,62 @@ module.exports = {
     * @return object
     * 
     */
-    addURLData: function ({groupName, groupImg, userUniqId}, res) {
+    addURLData: function ({groupName, groupImg, userUniqId, urlType}, res) {
         return new Promise( async(resolve, reject) => {
             if (groupName && groupImg && userUniqId) {
                     let generateUrl = {};
-                 
                     generateUrl.groupName = groupName ;
                     generateUrl.groupImg = groupImg;
                     generateUrl.userUniqId = userUniqId;
-                    console.log('@@generateUrl', generateUrl);
-
+                    generateUrl.urlType = urlType;
                      try {
-                        generateURLsModel.create(generateUrl).then(async function (err, account) {
-                            if(err) {
-                                console.log('@@e', err);
-                                const respose = await responseService.error({ msg: err })
-                                resolve(respose);
-                            }
+                        generateURLsModel.create(generateUrl).then(async function ( urlData) {
                             try {
-                                if (account) {
-                                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: account })
-                                    console.log('@@respose', respose);
+                                if (urlData) {
+                                    const url = generateURL(urlType, urlData.id)
+                                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: {...urlData.dataValues, url: url} })
                                     resolve(respose);
                                 }
                             } catch (e) {
-                                console.log('@@e', e);
                                 const respose = await responseService.error({ msg: e })
                                 resolve(respose);
                             }
                         })
-                        
                     } catch (e) {
-                        console.log('@@@@error', e);
                         const respose = await responseService.error({ msg: e })
                         resolve(respose);
                     }               
             }
         })
+    },
+
+    getUrlData: function({id}, res) {
+        return new Promise(async(resolve, reject) => {
+            if(id) {
+                const data = await generateURLsModel.findOne({where: {id: id}});
+                if (data) {
+                    data.groupImg = constant.IMAGE_BASE_URL + data.groupImg
+                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: data })
+                    resolve(respose);
+                }
+                else {
+                    const respose = await responseService.error({ msg: constant.URL_NOT_FOUND })
+                    reject(respose);
+                }
+            } else {
+                const respose = await responseService.error({ msg: constant.URL_NOT_FOUND })
+                reject(respose);
+            }
+        })
+    }
+    
+    
+}
+function generateURL(platformType, urlIds){
+    switch(platformType) {
+        case constant.WHATSAPP:
+            return `${constant.BASE_URL}/whatsapplink/${urlIds}`
+        default:
+            return `${constant.BASE_URL}/whatsapplink/${urlIds}`
     }
 }

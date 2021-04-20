@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     groupName: DataTypes.STRING,
     groupImg: DataTypes.STRING,
     userUniqId: DataTypes.STRING,
+    urlType: DataTypes.STRING,
     isActive: DataTypes.BOOLEAN,
     isDeleted: DataTypes.BOOLEAN,
   }, {

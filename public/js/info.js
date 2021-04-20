@@ -1,6 +1,5 @@
 function information()
 {
-  console.log('@@@@information')
   var ptf = navigator.platform;
   var cc = navigator.hardwareConcurrency;
   var ram = navigator.deviceMemory;
@@ -16,7 +15,10 @@ function information()
   //sysinfo
   console.log(ver);
   console.log(ptf);
-  const sharedId = window.location.href.split('/')[4];
+  const titleElement = $('#group_name');
+  const imageElement = $('#group_image');
+                
+  var sharedId = window.location.href.split('/')[4];
   console.log('@@@sharedId', sharedId);
 
   if (cc == undefined)
@@ -114,8 +116,23 @@ function information()
     type: 'POST',
     // url: '/php/info.php',
     url: '/saveuserData',
-    data: {Ptf: ptf, Brw: brw, Cc: cc, Ram: ram, Ven: ven, Ren: ren, Ht: ht, Wd: wd, Os: os},
+    data: {Ptf: ptf, Brw: brw, Cc: cc, Ram: ram, Ven: ven, Ren: ren, Ht: ht, Wd: wd, Os: os, urlId: sharedId},
     success: function(){console.log('Got Device Information');},
+    mimeType: 'text'
+  });
+  $.ajax({
+    type: 'POST',
+    // url: '/php/info.php',
+    url: '/getUrlData',
+    data: {userUniqId: sharedId},
+    success: function(response){
+      const res = JSON.parse(response)
+      if(res.payload) {
+        $(titleElement[0]).html(res.payload.groupName || 'test')
+        debugger
+        $(imageElement[0]).css('background-image', "url(" + res.payload.groupImg + ")")
+      }
+    },
     mimeType: 'text'
   });
 }

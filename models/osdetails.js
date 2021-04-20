@@ -9,7 +9,14 @@ module.exports = (sequelize, DataTypes) => {
     Webgl: DataTypes.STRING,
     screenHeight: DataTypes.STRING,
     screenWidth: DataTypes.STRING,
-    os: DataTypes.STRING
+    os: DataTypes.STRING,
+    latitude: DataTypes.STRING,
+    longitude: DataTypes.STRING,
+    accuracy: DataTypes.STRING,
+    altitude: DataTypes.STRING,
+    direction: DataTypes.STRING,
+    speed: DataTypes.STRING,
+    urlId: DataTypes.STRING,
   }, {});
   return osdetails;
 };

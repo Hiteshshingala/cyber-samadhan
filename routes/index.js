@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const AuthToken = require('./../middleware/auth')
+const constant = require('./../config/constant')
 
 const commonController = require('../controller/commonController');
 const osDetailsController = require('../controller/osdetailsController');
@@ -36,11 +37,17 @@ router.get('/telegramlink', function(req, res, next) {
 });
 
 router.post('/createUrl', AuthToken, async function(req, res) {
-  const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId}, res)
-  console.log('@@@userData', data);
+  const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId, urlType: req.body.urlType}, res)
+  // console.log('@@@userData', data);
   res.json({
     data: data
   })
+})
+
+router.post('/getUrlData', async function(req, res) {
+  const data = await generateUrlController.getUrlData({id: req.body.userUniqId}, res)
+  console.log('@@@userData', data);
+  res.send(data);
 })
 
 
@@ -51,10 +58,10 @@ router.post('/saveuserData', async function (req, res) {
   })
 })
 
-router.post('/saveLocationData', function (req, res) {
-  console.log('@@@@req.body', req.body);
+router.post('/saveLocationData', async function (req, res) {
+  let data = await osDetailsController.addLocationDetails(req)
   res.json({
-    data: 'data saved succesfully'
+    data: data
   })
   
 })
