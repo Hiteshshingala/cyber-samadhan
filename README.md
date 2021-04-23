@@ -24,3 +24,12 @@ Database user: sql6405459
 Database password: P7Q9QRFvvW
 Port number: 3306
 
+
+AWS RDS 
+Host: database-1.cwxdzaclemga.us-east-2.rds.amazonaws.com
+
+username: admin
+Password:
+98iq9Is0X6nyKaetqcFQ
+
+
