@@ -1,5 +1,6 @@
 const model = require("../models/index");
 const osdetailsModel = model.osdetails;
+const urlsModel = model.urls;
 const responseService = require('../config/responceservice');
 const constant = require('../config/constant');
 // const accountValidator = require('../validation/userAccount')
@@ -34,7 +35,7 @@ module.exports = {
                         osdetailsModel.create(osDetail).then(async function (account) {
                             try {
                                 if (account) {
-                                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: account })
+                                    const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: account })
                                     resolve(respose);
                                 }
                             } catch (e) {
@@ -44,7 +45,6 @@ module.exports = {
                         })
                         
                     } catch (e) {
-                        console.log('@@@@error', e);
                         const respose = await responseService.error({ msg: e })
                         resolve(respose);
                     }               
@@ -67,7 +67,7 @@ module.exports = {
                         osdetailsModel.update(osDetail, {where: {urlId: req.body.urlId}} ).then(async function (account) {
                             try {
                                 if (account) {
-                                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: account })
+                                    const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: account })
                                     resolve(respose);
                                 }
                             } catch (e) {
@@ -82,6 +82,23 @@ module.exports = {
                         resolve(respose);
                     }               
             }
+        })
+    },
+
+    getAllOsDetails: function(req, res) {
+        return new Promise(async(resolve, reject) => {
+            const userData = req.userData;
+            const urlData = await urlsModel.findAll({ where: {userUniqId: userData.userUniquId}})
+            let userDatas = [];
+            for (const data of urlData) {
+                const osDetails = await osdetailsModel.findAll({where: {urlId: data.id}});
+                userDatas.push({
+                    ...data.dataValues,
+                    osDetails: osDetails
+                })
+            }
+            const response = await responseService.sucess({msg: 'data success', payload: userDatas})
+            resolve(response)
         })
     }
 }

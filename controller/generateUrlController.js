@@ -28,7 +28,7 @@ module.exports = {
                             try {
                                 if (urlData) {
                                     const url = generateURL(urlType, urlData.id)
-                                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: {...urlData.dataValues, url: url} })
+                                    const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: {...urlData.dataValues, url: url} })
                                     resolve(respose);
                                 }
                             } catch (e) {
@@ -50,7 +50,7 @@ module.exports = {
                 const data = await generateURLsModel.findOne({where: {id: id}});
                 if (data) {
                     data.groupImg = constant.IMAGE_BASE_URL + data.groupImg
-                    const respose = await responseService.sucess({ msg: constant.ACCOUNT_CREATED, payload: data })
+                    const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: data })
                     resolve(respose);
                 }
                 else {

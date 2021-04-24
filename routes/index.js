@@ -63,6 +63,13 @@ router.post('/saveLocationData', async function (req, res) {
   res.json({
     data: data
   })
+})
+
+router.get('/getOsDetailsByUser', AuthToken, async function (req, res) {
+  let data = await osDetailsController.getAllOsDetails(req)
+  res.json({
+    data: data
+  })
   
 })
 

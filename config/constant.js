@@ -51,23 +51,10 @@ module.exports = {
     EMAIL_ALLREADY_EXIST: 'Email Already Exist',
     USER_NOT_VALID: 'User Not Valid',
 
-
+    DATA_SAVED: 'Data Saved Successfully',
 
     //user not found
     URL_NOT_FOUND: 'URL not found',
 
-
-
-    //validation
-    PLEASE_ENETER_NAME: 'Please Enter Name',
-    PLEASE_ENETER_ACCOUNTNO: 'Please Enter Account No',
-    PLEASE_ENETER_ROUTINGNO: 'Please Enter Routing No',
-    PLEASE_ENETER_DEFAULT: 'Please Enter Default',
-    PLEASE_ENETER_MODE: 'Please Enter Mode',
-    PLEASE_ENETER_CITY: 'Please Enter City',
-    PLEASE_ENETER_STATE: 'Please Enter State',
-    PLEASE_ENETER_COUNTRY: 'Please Enter Country',
-    PLEASE_ENETER_ZIP: 'Please Enter Zip Code',
-    PLEASE_ENETER_COASTCODE: 'Please Enter Coast Code',
 
 }
