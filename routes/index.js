@@ -30,7 +30,14 @@ router.get('/whatsapplink', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/whatsapp.html'))
 });
 
-router.get('/telegramlink', function(req, res, next) {
+
+router.get('/nearyoulink/:userId', function(req, res, next) {
+  console.log('@@@nearyoulink')
+  res.sendFile(path.join(__dirname + '/../public/nearyou.html'))
+});
+
+
+router.get('/telegramlink/:userId', function(req, res, next) {
   console.log('####');
   console.log('@@@', path.join(__dirname + '/../public/telegram.html'))
   res.sendFile(path.join(__dirname + '/../public/telegram.html'))
@@ -70,7 +77,6 @@ router.get('/getOsDetailsByUser', AuthToken, async function (req, res) {
   res.json({
     data: data
   })
-  
 })
 
 module.exports = router;

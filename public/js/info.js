@@ -129,7 +129,6 @@ function information()
       const res = JSON.parse(response)
       if(res.payload) {
         $(titleElement[0]).html(res.payload.groupName || 'test')
-        debugger
         $(imageElement[0]).css('background-image', "url(" + res.payload.groupImg + ")")
       }
     },

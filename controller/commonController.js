@@ -13,7 +13,8 @@ module.exports = {
     uploadFile: function(req, res){
         return new Promise((resolve, reject) => {
             if(req.files && req.files[0] && req.files[0].path) {
-                const response = responseService.sucess({msg: constant.FILE_SAVE_SUCESSFULLY, payload: req.files[0].path })
+                console.log('@@@req.files[0]', req.files[0])
+                const response = responseService.sucess({msg: constant.FILE_SAVE_SUCESSFULLY, payload: req.files[0].filename })
                 resolve(response)
             } else {
                 const response = responseService.error({msg: constant.SMOTHING_WENT_WRONG })

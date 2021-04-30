@@ -1,6 +1,5 @@
 function locate()
 {
-  debugger
   if(navigator.geolocation)
   {
     var optn = {enableHighAccuracy : true, timeout : 30000, maximumage: 0};
