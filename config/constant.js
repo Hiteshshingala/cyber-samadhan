@@ -10,8 +10,9 @@ module.exports = {
     WHATSAPP: 'whatsapp',
     TELEGRAM: 'telegram',
     GDRIVE: 'gdrive',
-    BASE_URL: 'http://localhost:8080',
-    IMAGE_BASE_URL: 'http://localhost:8080/public/images/uploads/',
+    NEARYOU: 'nearyoulink',
+    BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8080',
+    IMAGE_BASE_URL: process.env.IMAGE_BASE_URL ? process.env.IMAGE_BASE_URL : 'http://localhost:8080/public/images/uploads/',
 
     // for error message
     USER_REGISTER_SUCCESSFULLY : 'User Register successfully',

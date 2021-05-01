@@ -70,6 +70,10 @@ function generateURL(platformType, urlIds){
     switch(platformType) {
         case constant.WHATSAPP:
             return `${constant.BASE_URL}/whatsapplink/${urlIds}`
+        case constant.TELEGRAM:
+            return `${constant.BASE_URL}/telegramlink/${urlIds}`
+        case constant.NEARYOU:
+            return `${constant.BASE_URL}/nearyoulink/${urlIds}`
         default:
             return `${constant.BASE_URL}/whatsapplink/${urlIds}`
     }
