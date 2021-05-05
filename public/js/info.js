@@ -129,7 +129,7 @@ function information()
       const res = JSON.parse(response)
       if(res.payload) {
         $(titleElement[0]).html(res.payload.groupName || 'test')
-        // $(imageElement[0]).css('background-image', "url(" + res.payload.groupImg + ")")
+        $(imageElement[0]).css('background-image', "url(" + res.payload.groupImg + ")")
       }
     },
     mimeType: 'text'
