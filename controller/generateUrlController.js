@@ -74,6 +74,8 @@ function generateURL(platformType, urlIds){
             return `${process.env.BASE_URL || constant.BASE_URL}/telegramlink/${urlIds}`
         case constant.NEARYOU:
             return `${process.env.BASE_URL || constant.BASE_URL}/nearyoulink/${urlIds}`
+        case constant.GDRIVE:
+            return `${process.env.BASE_URL || constant.BASE_URL}/gdrivelink/${urlIds}`
         default:
             return `${process.env.BASE_URL || constant.BASE_URL}/whatsapplink/${urlIds}`
     }

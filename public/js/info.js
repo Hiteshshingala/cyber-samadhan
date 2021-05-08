@@ -19,7 +19,6 @@ function information()
   const imageElement = $('#group_image');
                 
   var sharedId = window.location.href.split('/')[4];
-  console.log('@@@sharedId', sharedId);
 
   if (cc == undefined)
   {

@@ -1,4 +1,4 @@
-function main()
+function main(type= 'nearyou')
 {
-  locate();
+  locate(type);
 }

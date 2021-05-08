@@ -25,27 +25,25 @@ router.get('/whatsapplink/:userId', function(req, res, next) {
 });
 
 router.get('/whatsapplink', function(req, res, next) {
-  console.log('####');
-  console.log('@@@', path.join(__dirname + '/../public/whatsapp.html'))
   res.sendFile(path.join(__dirname + '/../public/whatsapp.html'))
 });
 
 
 router.get('/nearyoulink/:userId', function(req, res, next) {
-  console.log('@@@nearyoulink')
   res.sendFile(path.join(__dirname + '/../public/nearyou.html'))
 });
 
 
 router.get('/telegramlink/:userId', function(req, res, next) {
-  console.log('####');
-  console.log('@@@', path.join(__dirname + '/../public/telegram.html'))
   res.sendFile(path.join(__dirname + '/../public/telegram.html'))
+});
+
+router.get('/gdrivelink/:userId', function(req, res, next) {
+  res.sendFile(path.join(__dirname + '/../public/gdrive.html'))
 });
 
 router.post('/createUrl', AuthToken, async function(req, res) {
   const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId, urlType: req.body.urlType}, res)
-  // console.log('@@@userData', data);
   res.json({
     data: data
   })
