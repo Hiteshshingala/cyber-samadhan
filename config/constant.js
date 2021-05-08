@@ -14,6 +14,7 @@ module.exports = {
     BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8080',
     IMAGE_BASE_URL: process.env.IMAGE_BASE_URL ? process.env.IMAGE_BASE_URL : 'http://localhost:8080/public/images/uploads/',
 
+    LIVE_WHATSAPP_URL: 'https://whatsaapgroup.com',
     // for error message
     USER_REGISTER_SUCCESSFULLY : 'User Register successfully',
     PLEASE_ENTER_VALID_PASSWORD  : 'Please Enter Valid Password',
