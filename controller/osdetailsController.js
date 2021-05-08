@@ -77,7 +77,6 @@ module.exports = {
                         })
                         
                     } catch (e) {
-                        console.log('@@@@error', e);
                         const respose = await responseService.error({ msg: e })
                         resolve(respose);
                     }               
@@ -88,10 +87,13 @@ module.exports = {
     getAllOsDetails: function(req, res) {
         return new Promise(async(resolve, reject) => {
             const userData = req.userData;
-            const urlData = await urlsModel.findAll({ where: {userUniqId: userData.userUniquId}})
+            const urlData = await urlsModel.findAll({ where: {userUniqId: userData.userUniquId}, order: [["createdAt", "DESC"]]})
             let userDatas = [];
             for (const data of urlData) {
-                const osDetails = await osdetailsModel.findAll({where: {urlId: data.id}});
+                const osDetails = await osdetailsModel.findAll({
+                  where: { urlId: data.id },
+                  order: [["createdAt", "DESC"]],
+                });
                 userDatas.push({
                     ...data.dataValues,
                     osDetails: osDetails
