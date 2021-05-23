@@ -49,7 +49,7 @@ module.exports = {
             if(id) {
                 const data = await generateURLsModel.findOne({where: {id: id}});
                 if (data) {
-                    data.groupImg = constant.IMAGE_BASE_URL + data.groupImg
+                    data.groupImg = constant.WP_BASE_URL + data.groupImg
                     const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: data })
                     resolve(respose);
                 }
@@ -69,14 +69,14 @@ module.exports = {
 function generateURL(platformType, urlIds){
     switch(platformType) {
         case constant.WHATSAPP:
-            return `${process.env.BASE_URL || constant.BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/whatsapplink/${urlIds}`
         case constant.TELEGRAM:
-            return `${process.env.BASE_URL || constant.BASE_URL}/telegramlink/${urlIds}`
+            return `${process.env.BASE_URL || constant.TELEGRAM_BASE_URL}/telegramlink/${urlIds}`
         case constant.NEARYOU:
-            return `${process.env.BASE_URL || constant.BASE_URL}/nearyoulink/${urlIds}`
+            return `${process.env.BASE_URL || constant.NEAR_YOU_BASE_URL}/nearyoulink/${urlIds}`
         case constant.GDRIVE:
-            return `${process.env.BASE_URL || constant.BASE_URL}/gdrivelink/${urlIds}`
+            return `${process.env.BASE_URL || constant.GOOGLE_BASE_URL}/gdrivelink/${urlIds}`
         default:
-            return `${process.env.BASE_URL || constant.BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/whatsapplink/${urlIds}`
     }
 }
