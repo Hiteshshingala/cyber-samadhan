@@ -23,8 +23,8 @@ app.set('port', port);
  * Certificates 
  */
 
- var privateKey  = fs.readFileSync('certificates/e843e8b18648c07a.key', 'utf8');
- var certificate = fs.readFileSync('certificates/e843e8b18648c07a.crt', 'utf8');
+ var privateKey  = fs.readFileSync('certificates/server.key', 'utf8');
+ var certificate = fs.readFileSync('certificates/8e707e01b0b0c2cd.pem', 'utf8');
  var credentials = {key: privateKey, cert: certificate};
 
 /**
