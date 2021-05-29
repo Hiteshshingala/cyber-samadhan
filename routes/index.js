@@ -43,7 +43,7 @@ router.get('/gdrivelink/:userId', function(req, res, next) {
 });
 
 router.post('/createUrl', AuthToken, async function(req, res) {
-  const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId, urlType: req.body.urlType}, res)
+  const data = await generateUrlController.addURLData({groupName: req.body.groupName, groupImg: req.body.groupImg, userUniqId: req.userData.userUniquId, urlType: req.body.urlType, userName: req.body.userName, sharingUrl: req.body.sharingUrl}, res)
   res.json({
     data: data
   })

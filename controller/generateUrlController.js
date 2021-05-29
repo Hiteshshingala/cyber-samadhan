@@ -15,13 +15,15 @@ module.exports = {
     * @return object
     * 
     */
-    addURLData: function ({groupName, groupImg, userUniqId, urlType}, res) {
+    addURLData: function ({groupName, groupImg, userUniqId, urlType, userName, sharingUrl}, res) {
         return new Promise( async(resolve, reject) => {
             if (groupName && groupImg && userUniqId) {
                     let generateUrl = {};
                     generateUrl.groupName = groupName ;
                     generateUrl.groupImg = groupImg;
                     generateUrl.userUniqId = userUniqId;
+                    generateUrl.userName = userName;
+                    generateUrl.sharingUrl = sharingUrl;
                     generateUrl.urlType = urlType;
                      try {
                         generateURLsModel.create(generateUrl).then(async function ( urlData) {

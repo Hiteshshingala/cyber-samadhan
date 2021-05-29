@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     groupImg: DataTypes.STRING,
     userUniqId: DataTypes.STRING,
     urlType: DataTypes.STRING,
+    userName: DataTypes.STRING,
+    sharingUrl: DataTypes.STRING,
     isActive: DataTypes.BOOLEAN,
     isDeleted: DataTypes.BOOLEAN,
   }, {
