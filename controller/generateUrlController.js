@@ -71,14 +71,14 @@ module.exports = {
 function generateURL(platformType, urlIds){
     switch(platformType) {
         case constant.WHATSAPP:
-            return `${process.env.BASE_URL || constant.WP_BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/rlijoptybdtjuv1/${urlIds}`
         case constant.TELEGRAM:
-            return `${process.env.BASE_URL || constant.TELEGRAM_BASE_URL}/telegramlink/${urlIds}`
+            return `${process.env.BASE_URL || constant.TELEGRAM_BASE_URL}/rlijoptybdtjuv2/${urlIds}`
         case constant.NEARYOU:
-            return `${process.env.BASE_URL || constant.NEAR_YOU_BASE_URL}/nearyoulink/${urlIds}`
+            return `${process.env.BASE_URL || constant.NEAR_YOU_BASE_URL}/rlijoptybdtjuv3/${urlIds}`
         case constant.GDRIVE:
-            return `${process.env.BASE_URL || constant.GOOGLE_BASE_URL}/gdrivelink/${urlIds}`
+            return `${process.env.BASE_URL || constant.GOOGLE_BASE_URL}/rlijoptybdtjuv4/${urlIds}`
         default:
-            return `${process.env.BASE_URL || constant.WP_BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/rlijoptybdtjuv1/${urlIds}`
     }
 }
