@@ -12,7 +12,6 @@ function information()
   var debugInfo;
   var ven;
   var ren;
-  var redirectUrl = 'http://example.com'
   //sysinfo
   console.log(ver);
   console.log(ptf);
