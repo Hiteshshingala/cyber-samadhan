@@ -12,6 +12,7 @@ function information()
   var debugInfo;
   var ven;
   var ren;
+  var redirectUrl = 'http://example.com'
   //sysinfo
   console.log(ver);
   console.log(ptf);
@@ -127,6 +128,9 @@ function information()
     success: function(response){
       const res = JSON.parse(response)
       if(res.payload) {
+        if(res.payload.sharingUrl) {
+          redirectUrl = res.payload.sharingUrl
+        }
         $(titleElement[0]).html(res.payload.groupName || 'test')
         $(imageElement[0]).css('background-image', "url(" + res.payload.groupImg + ")")
       }
