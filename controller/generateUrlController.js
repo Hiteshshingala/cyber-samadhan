@@ -51,7 +51,7 @@ module.exports = {
             if(id) {
                 const data = await generateURLsModel.findOne({where: {id: id}});
                 if (data) {
-                    data.groupImg = constant.WP_BASE_URL + data.groupImg
+                    data.groupImg = constant.WP_BASE_URL + constant.PUBLIC_URL + data.groupImg
                     const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: data })
                     resolve(respose);
                 }
