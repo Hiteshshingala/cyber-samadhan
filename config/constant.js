@@ -13,6 +13,11 @@ module.exports = {
     NEARYOU: 'nearyoulink',
     BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:8080',
     IMAGE_BASE_URL: process.env.IMAGE_BASE_URL ? process.env.IMAGE_BASE_URL : 'http://localhost:8080/public/images/uploads/',
+    WP_BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'https://whatsaapgroup.com',
+    PUBLIC_URL: process.env.BASE_URL ? process.env.BASE_URL : '/public/images/uploads/',
+    TELEGRAM_BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'https://telegrm.co.in',
+    NEAR_YOU_BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'https://takatak.co.in',
+    GOOGLE_BASE_URL: process.env.BASE_URL ? process.env.BASE_URL : 'https://googldrive.in',
 
     LIVE_WHATSAPP_URL: 'https://whatsaapgroup.com',
     // for error message

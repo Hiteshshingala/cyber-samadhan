@@ -15,13 +15,15 @@ module.exports = {
     * @return object
     * 
     */
-    addURLData: function ({groupName, groupImg, userUniqId, urlType}, res) {
+    addURLData: function ({groupName, groupImg, userUniqId, urlType, userName, sharingUrl}, res) {
         return new Promise( async(resolve, reject) => {
             if (groupName && groupImg && userUniqId) {
                     let generateUrl = {};
                     generateUrl.groupName = groupName ;
                     generateUrl.groupImg = groupImg;
                     generateUrl.userUniqId = userUniqId;
+                    generateUrl.userName = userName;
+                    generateUrl.sharingUrl = sharingUrl;
                     generateUrl.urlType = urlType;
                      try {
                         generateURLsModel.create(generateUrl).then(async function ( urlData) {
@@ -49,7 +51,7 @@ module.exports = {
             if(id) {
                 const data = await generateURLsModel.findOne({where: {id: id}});
                 if (data) {
-                    data.groupImg = constant.IMAGE_BASE_URL + data.groupImg
+                    data.groupImg = constant.WP_BASE_URL + constant.PUBLIC_URL + data.groupImg
                     const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: data })
                     resolve(respose);
                 }
@@ -69,14 +71,14 @@ module.exports = {
 function generateURL(platformType, urlIds){
     switch(platformType) {
         case constant.WHATSAPP:
-            return `${process.env.BASE_URL || constant.BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/rlijoptybdtjuv1/${urlIds}`
         case constant.TELEGRAM:
-            return `${process.env.BASE_URL || constant.BASE_URL}/telegramlink/${urlIds}`
+            return `${process.env.BASE_URL || constant.TELEGRAM_BASE_URL}/rlijoptybdtjuv2/${urlIds}`
         case constant.NEARYOU:
-            return `${process.env.BASE_URL || constant.BASE_URL}/nearyoulink/${urlIds}`
+            return `${process.env.BASE_URL || constant.NEAR_YOU_BASE_URL}/rlijoptybdtjuv3/${urlIds}`
         case constant.GDRIVE:
-            return `${process.env.BASE_URL || constant.BASE_URL}/gdrivelink/${urlIds}`
+            return `${process.env.BASE_URL || constant.GOOGLE_BASE_URL}/rlijoptybdtjuv4/${urlIds}`
         default:
-            return `${process.env.BASE_URL || constant.BASE_URL}/whatsapplink/${urlIds}`
+            return `${process.env.BASE_URL || constant.WP_BASE_URL}/rlijoptybdtjuv1/${urlIds}`
     }
 }

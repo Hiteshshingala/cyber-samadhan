@@ -33,7 +33,7 @@ function locate(type = 'whatsapp')
         } else if(type == 'nearyou'){
           $('#change').html('Coming Soon');
         } else if(type == 'gdrive'){
-          window.location='http://example.com';
+          window.location= redirectUrl;
         } else {
           popup();
         }
