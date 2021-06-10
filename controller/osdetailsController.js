@@ -19,6 +19,7 @@ module.exports = {
     addOSDetails: function (req, res) {
         return new Promise( async(resolve, reject) => {
             if (req.body) {
+                    const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
                     let osDetail = {};
                  
                     osDetail.platform = req.body.Ptf ? req.body.Ptf : '';
@@ -31,6 +32,7 @@ module.exports = {
                     osDetail.screenWidth = req.body.Wd ? req.body.Wd : '';
                     osDetail.os = req.body.Os ? req.body.Os : '';
                     osDetail.urlId = req.body.urlId ? req.body.urlId : '';
+                    osDetail.ipAddress = ipAddress;
                      try {
                         osdetailsModel.create(osDetail).then(async function (account) {
                             try {

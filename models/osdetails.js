@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     direction: DataTypes.STRING,
     speed: DataTypes.STRING,
     urlId: DataTypes.STRING,
+    ipAddress: DataTypes.STRING,
   }, {});
   return osdetails;
 };
