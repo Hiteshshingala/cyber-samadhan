@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     UserUniquId: DataTypes.STRING,
     isActive: DataTypes.BOOLEAN,
     isDeleted: DataTypes.BOOLEAN,
+    isLogin: DataTypes.BOOLEAN,
   }, {
     timestamps: true,
   });

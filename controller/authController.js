@@ -109,6 +109,11 @@ module.exports = {
                 if (req.body.password) {
                     userModel.findOne({ where: { email: req.body.email } }, { email: 1, password: 1, role: 1 }).then(async function (users) {
                         if (users) {
+                            if(!users.isLogin) {
+                                res.status(401)
+                                const response = await responseService.error({ msg: constant.ACCOUNT_NOT_ACTIVE })
+                                resolve(response)   
+                            }
                             if (bcrypt.compareSync(req.body.password, users.password)) {
                                 users.password = null
                                 let token = jwt.sign({ email: req.body.email, id: users.id, role: users.role, userUniquId: users.UserUniquId }, constant.JWT_SECRET, { expiresIn: constant.JWT_EXPIRETIME })
@@ -121,6 +126,8 @@ module.exports = {
                                         role: users.role
                                     }
                                 }
+                                users.isLogin = true;
+                                users.save();
                                 res.status(200)
                                 const response = await responseService.sucess({ msg: constant.USER_LOGIN_SUCCESS, payload: responceData })
                                 resolve(response);
@@ -220,8 +227,30 @@ module.exports = {
                 })
             } else {
                 res.status(401)
-                rresolve('please enter valid password')
+                resolve('please enter valid password')
             }
         })
     },
+
+    logOut: function(req, res) {
+        return new Promise((resolve, reject) => {
+            if (req.userData.email != null && req.userData.email != undefined ) {
+                userModel.findOne({ where: { email: req.userData.email } }).then(function (users) {
+                    if (users == null || users == undefined) {
+                        users.isLogin = false;
+                        users.save().then(data => {
+                            res.status(200)
+                            resolve('Please check link')
+                        });
+                    } else {
+                        res.status(401)
+                        resolve('please enter valid email')
+                    }
+                })
+            } else {
+                res.status(401)
+                resolve('please enter valid email')
+            }
+        })
+    }
 }

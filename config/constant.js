@@ -1,7 +1,7 @@
 module.exports = {
     //for config
     JWT_SECRET : process.env.JWT_SECRET || 'secret',
-    JWT_EXPIRETIME : '24h',
+    JWT_EXPIRETIME : '365d',
     EMAIL: process.env.EMAIL,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
 
@@ -25,6 +25,7 @@ module.exports = {
     PLEASE_ENTER_VALID_PASSWORD  : 'Please Enter Valid Password',
     PLEASE_ENTER_VALID_EMAIL : 'Please Enter Valid Email',
     PLEASE_ENTER_CURRECT_PASSWORD : 'Please Enter currect Password',
+    ACCOUNT_NOT_ACTIVE : 'Account not active please contact admin',
     ACCOUNT_CREATED : 'Account Created',
     ACCOUNT_UPDATE_SUCCESS : 'Account Update Success',
     ACCOUNT_NOT_FOUND : 'Account Not Found',

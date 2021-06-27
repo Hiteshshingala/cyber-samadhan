@@ -58,6 +58,11 @@ router.post('/forgotpage', async function (req, res) {
   res.send(data)
 })
 
+router.post('/logout', async function (req, res) {
+  let data = await authController.logOut(req, res)
+  res.send(data)
+})
+
 router.get('/', AuthToken, async function (req, res, next) {
   let data = await userController.getUsers(req, res);
   res.send(data);

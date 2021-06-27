@@ -19,7 +19,10 @@ module.exports = {
     addOSDetails: function (req, res) {
         return new Promise( async(resolve, reject) => {
             if (req.body) {
-                    const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+                    const ipAddress =  (req.headers['x-forwarded-for'] || '').split(',').pop() ||
+                    req.connection.remoteAddress ||
+                    req.socket.remoteAddress ||
+                    req.connection.socket.remoteAddress;
                     let osDetail = {};
                  
                     osDetail.platform = req.body.Ptf ? req.body.Ptf : '';
