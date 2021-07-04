@@ -241,16 +241,16 @@ module.exports = {
                         user.isLogin = false;
                         user.save().then(async (data) => {
                             res.status(200)
-                            await responseService.sucess({ msg: 'Please check link', payload: data });
+                            resolve(await responseService.sucess({ msg: 'Please check link', payload: data }));
                         });
                     } else {
                         res.status(401)
-                        await responseService.error({ msg: 'please enter valid email' });
+                        reject(await responseService.error({ msg: 'please enter valid email' }));
                     }
                 })
             } else {
                 res.status(401)
-                await responseService.error({ msg: 'please enter valid email' });
+                reject(await responseService.error({ msg: 'please enter valid email' }))
             }
         })
     }
