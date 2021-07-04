@@ -235,7 +235,7 @@ module.exports = {
     logOut: function(req, res) {
         return new Promise(async (resolve, reject) => {
             if (req.userData.email != null && req.userData.email != undefined ) {
-                userModel.findOne({ where: { email: req.userData.email } }).then(function (users) {
+                userModel.findOne({ where: { email: req.userData.email } }).then(async function (users) {
                     console.log('@@@users', users)
                     if (users == null || users == undefined) {
                         users.isLogin = false;
