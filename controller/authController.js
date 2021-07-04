@@ -236,10 +236,11 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             if (req.userData.email != null && req.userData.email != undefined ) {
                 userModel.findOne({ where: { email: req.userData.email } }).then(async function (users) {
-                    console.log('@@@users', users)
-                    if (users == null || users == undefined) {
-                        users.isLogin = false;
-                        users.save().then(async (data) => {
+                    const user = users.dataValues;
+                    console.log('@@@users', user)
+                    if (user == null || user == undefined) {
+                        user.isLogin = false;
+                        user.save().then(async (data) => {
                             res.status(200)
                             await responseService.sucess({ msg: 'Please check link' });
                         });
