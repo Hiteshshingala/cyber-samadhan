@@ -239,7 +239,7 @@ module.exports = {
                     console.log('@@@users', users)
                     if (users == null || users == undefined) {
                         users.isLogin = false;
-                        users.save().then(data => {
+                        users.save().then(async (data) => {
                             res.status(200)
                             await responseService.sucess({ msg: 'Please check link' });
                         });
