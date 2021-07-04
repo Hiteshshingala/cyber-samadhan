@@ -233,24 +233,24 @@ module.exports = {
     },
 
     logOut: function(req, res) {
-        console.log('@@@req.userData.email', req.userData)
         return new Promise((resolve, reject) => {
             if (req.userData.email != null && req.userData.email != undefined ) {
                 userModel.findOne({ where: { email: req.userData.email } }).then(function (users) {
+                    console.log('@@@users', users)
                     if (users == null || users == undefined) {
                         users.isLogin = false;
                         users.save().then(data => {
                             res.status(200)
-                            resolve('Please check link')
+                            await responseService.sucess({ msg: 'Please check link' });
                         });
                     } else {
                         res.status(401)
-                        resolve('please enter valid email')
+                        await responseService.error({ msg: 'please enter valid email' });
                     }
                 })
             } else {
                 res.status(401)
-                resolve('please enter valid email')
+                await responseService.error({ msg: 'please enter valid email' });
             }
         })
     }
