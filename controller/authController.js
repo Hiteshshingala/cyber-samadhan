@@ -107,7 +107,7 @@ module.exports = {
         return new Promise(async(resolve, reject) => {
             if (req.body.email != null && req.body.email != undefined && validate.emailIsValid(req.body.email)) {
                 if (req.body.password) {
-                    userModel.findOne({ where: { email: req.body.email } }, { email: 1, password: 1, role: 1 }).then(async function (users) {
+                    userModel.findOne({ where: { email: req.body.email } }).then(async function (users) {
                         if (users) {
                             if(!users.isLogin) {
                                 res.status(401)
@@ -115,7 +115,6 @@ module.exports = {
                                 resolve(response)   
                             }
                             if (bcrypt.compareSync(req.body.password, users.password)) {
-                                users.password = null
                                 let token = jwt.sign({ email: req.body.email, id: users.id, role: users.role, userUniquId: users.UserUniquId }, constant.JWT_SECRET, { expiresIn: constant.JWT_EXPIRETIME })
                                 let responceData = {
                                     token: token,
@@ -128,6 +127,7 @@ module.exports = {
                                 }
                                 users.isLogin = true;
                                 users.save();
+                                users.password = null
                                 res.status(200)
                                 const response = await responseService.sucess({ msg: constant.USER_LOGIN_SUCCESS, payload: responceData })
                                 resolve(response);
