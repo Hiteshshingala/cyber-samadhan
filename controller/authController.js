@@ -109,7 +109,7 @@ module.exports = {
                 if (req.body.password) {
                     userModel.findOne({ where: { email: req.body.email } }).then(async function (users) {
                         if (users) {
-                            if(!users.isLogin) {
+                            if(users.isLogin) {
                                 res.status(401)
                                 const response = await responseService.error({ msg: constant.ACCOUNT_NOT_ACTIVE })
                                 resolve(response)   
@@ -233,25 +233,36 @@ module.exports = {
     },
 
     logOut: function(req, res) {
+        try {
         return new Promise(async (resolve, reject) => {
             if (req.userData.email != null && req.userData.email != undefined ) {
                 userModel.findOne({ where: { email: req.userData.email } }).then(async function (users) {
                     const user = users.dataValues;
-                    if (user == null || user == undefined) {
+                    if (user !== null && user !== undefined) {
                         user.isLogin = false;
-                        user.save().then(async (data) => {
-                            res.status(200)
-                            resolve(await responseService.sucess({ msg: 'Please check link', payload: data }));
-                        });
+                        const data = await userModel.update({isLogin: false}, {where: { email: req.userData.email }})
+                        const resp = await responseService.sucess({ msg: 'Please check link', payload: data })
+                        resolve(resp);
+                        // user.save().then(async (data) => {
+                        //     res.status(200)
+                        //     console.log('@@@success')
+                        //     const resp = await responseService.sucess({ msg: 'Please check link', payload: data })
+                        //     resolve(resp);
+                        // });
                     } else {
                         res.status(401)
-                        reject(await responseService.error({ msg: 'please enter valid email' }));
+                        const resp = await responseService.error({ msg: 'please enter valid email' });
+                        resolve(resp);
                     }
                 })
             } else {
                 res.status(401)
-                reject(await responseService.error({ msg: 'please enter valid email' }))
+                const resp = await responseService.error({ msg: 'please enter valid email' });
+                resolve(resp);
             }
         })
+    } catch(err) {
+        console.log('err > logout', err)
+    }
     }
 }
