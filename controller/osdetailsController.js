@@ -66,7 +66,10 @@ module.exports = {
     },
     addLocationDetails: function (req, res) {
         return new Promise( async(resolve, reject) => {
-            if (req.body) {
+            if (req.body && req.body.urlId) {
+                const lastDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+                const urlData = await generateURLsModel.findOne({where: {id: req.body.urlId, createdAt: {$gt: lastDate} }});
+                if(urlData) {
                     let osDetail = {};
                  
                     osDetail.latitude = req.body.Lat ? req.body.Lat : '';
@@ -92,7 +95,11 @@ module.exports = {
                     } catch (e) {
                         const respose = await responseService.error({ msg: e })
                         resolve(respose);
-                    }               
+                    } 
+                }  else {
+                    const respose = await responseService.sucess({ msg: constant.LINK_EXPIRED, payload: {} })
+                    resolve(respose);
+                }              
             }
         })
     },
