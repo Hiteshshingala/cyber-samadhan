@@ -60,6 +60,7 @@ module.exports = {
     USER_NOT_VALID: 'User Not Valid',
 
     DATA_SAVED: 'Data Saved Successfully',
+    LINK_EXPIRED: 'Link Expired Please Contact Admin',
 
     //user not found
     URL_NOT_FOUND: 'URL not found',

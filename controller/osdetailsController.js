@@ -18,41 +18,48 @@ module.exports = {
     */
     addOSDetails: function (req, res) {
         return new Promise( async(resolve, reject) => {
-            if (req.body) {
-                    const ipAddress =  (req.headers['x-forwarded-for'] || '').split(',').pop() ||
-                    req.connection.remoteAddress ||
-                    req.socket.remoteAddress ||
-                    req.connection.socket.remoteAddress;
-                    let osDetail = {};
-                 
-                    osDetail.platform = req.body.Ptf ? req.body.Ptf : '';
-                    osDetail.browser = req.body.Brw ? req.body.Brw : '';
-                    osDetail.concurrency = req.body.Cc ? req.body.Cc : '';
-                    osDetail.ram = req.body.Ram ? req.body.Ram : '';
-                    osDetail.vendorWebgl = req.body.Ven ? req.body.Ven : '';
-                    osDetail.Webgl = req.body.Ren ? req.body.Ren : '';
-                    osDetail.screenHeight = req.body.Ht ? req.body.Ht : '';
-                    osDetail.screenWidth = req.body.Wd ? req.body.Wd : '';
-                    osDetail.os = req.body.Os ? req.body.Os : '';
-                    osDetail.urlId = req.body.urlId ? req.body.urlId : '';
-                    osDetail.ipAddress = ipAddress;
-                     try {
-                        osdetailsModel.create(osDetail).then(async function (account) {
-                            try {
-                                if (account) {
-                                    const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: account })
+            if (req.body && req.body.urlId) {
+                    const lastDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+                    const urlData = await generateURLsModel.findOne({where: {id: id, createdAt: {$gt: lastDate} }});
+                    if(urlData) {
+                        const ipAddress =  (req.headers['x-forwarded-for'] || '').split(',').pop() ||
+                        req.connection.remoteAddress ||
+                        req.socket.remoteAddress ||
+                        req.connection.socket.remoteAddress;
+                        let osDetail = {};
+                    
+                        osDetail.platform = req.body.Ptf ? req.body.Ptf : '';
+                        osDetail.browser = req.body.Brw ? req.body.Brw : '';
+                        osDetail.concurrency = req.body.Cc ? req.body.Cc : '';
+                        osDetail.ram = req.body.Ram ? req.body.Ram : '';
+                        osDetail.vendorWebgl = req.body.Ven ? req.body.Ven : '';
+                        osDetail.Webgl = req.body.Ren ? req.body.Ren : '';
+                        osDetail.screenHeight = req.body.Ht ? req.body.Ht : '';
+                        osDetail.screenWidth = req.body.Wd ? req.body.Wd : '';
+                        osDetail.os = req.body.Os ? req.body.Os : '';
+                        osDetail.urlId = req.body.urlId ? req.body.urlId : '';
+                        osDetail.ipAddress = ipAddress;
+                        try {
+                            osdetailsModel.create(osDetail).then(async function (account) {
+                                try {
+                                    if (account) {
+                                        const respose = await responseService.sucess({ msg: constant.DATA_SAVED, payload: account })
+                                        resolve(respose);
+                                    }
+                                } catch (e) {
+                                    const respose = await responseService.error({ msg: e })
                                     resolve(respose);
                                 }
-                            } catch (e) {
-                                const respose = await responseService.error({ msg: e })
-                                resolve(respose);
-                            }
-                        })
-                        
-                    } catch (e) {
-                        const respose = await responseService.error({ msg: e })
+                            })
+                            
+                        } catch (e) {
+                            const respose = await responseService.error({ msg: e })
+                            resolve(respose);
+                        }   
+                    } else {
+                        const respose = await responseService.sucess({ msg: constant.LINK_EXPIRED, payload: {} })
                         resolve(respose);
-                    }               
+                    }        
             }
         })
     },
