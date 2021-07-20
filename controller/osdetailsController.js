@@ -21,7 +21,7 @@ module.exports = {
         return new Promise( async(resolve, reject) => {
             if (req.body && req.body.urlId) {
                     const lastDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
-                    const urlData = await generateURLsModel.findOne({where: {id: id, createdAt: {$gt: lastDate} }});
+                    const urlData = await generateURLsModel.findOne({where: {id: req.body.urlId, createdAt: {$gt: lastDate} }});
                     if(urlData) {
                         const ipAddress =  (req.headers['x-forwarded-for'] || '').split(',').pop() ||
                         req.connection.remoteAddress ||
