@@ -1,6 +1,6 @@
 const model = require("../models/index");
 const osdetailsModel = model.osdetails;
-const generateURLsModel = model.generateURLsModel;
+const generateURLsModel = model.urls;
 const urlsModel = model.urls;
 const responseService = require('../config/responceservice');
 const constant = require('../config/constant');
